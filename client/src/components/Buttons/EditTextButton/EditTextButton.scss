@@ -1,0 +1,40 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixin';
+
+.edit-text-button {
+  @include flexRowNoWrapCenter;
+  position: absolute;
+  bottom: -64px;
+  left: 0;
+  height: 48px;
+  padding: 16px 12px;
+
+  @include fontMedium16;
+  color: $btn;
+
+  & > span {
+    width: 24px;
+    height: 24px;
+    margin-right: 8px;
+    transform: translateY(-1px);
+  }
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  &.edit-portrait {
+    top: 49%;
+    transform: translateY(-50%);
+    right: -140px;
+    left: auto;
+    bottom: auto;
+
+    @media screen and (max-width: 850px) {
+      top: auto;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: -50px;
+    }
+  }
+}

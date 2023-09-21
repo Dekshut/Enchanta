@@ -1,0 +1,146 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixin';
+
+.new-story {
+  @include flexColumnNoWrapCenter;
+  justify-content: flex-start;
+  position: relative;
+  width: 100vw;
+  height: 100%;
+
+  &::before {
+    content: '';
+    position: absolute;
+    width: 100vw;
+    height: 120px;
+    top: 120px;
+    background: linear-gradient($white, rgba(255, 255, 255, 0));
+    z-index: 1;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    width: 100vw;
+    height: 120px;
+    bottom: 120px;
+    background: linear-gradient(rgba(255, 255, 255, 0), $white);
+    z-index: 1;
+
+    @media screen and (max-width: 950px) {
+      bottom: 119px;
+    }
+
+    @media screen and (max-width: 650px) {
+      bottom: 185px;
+    }
+  }
+
+  &.all {
+    &::after {
+      bottom: 0;
+    }
+  }
+
+  &__content {
+    padding: 120px 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  &__generate {
+    width: 100%;
+    justify-content: center !important;
+  }
+
+  &__load {
+    @include flexColumnNoWrapCenter;
+    width: 100%;
+    gap: 92px;
+    margin-bottom: 60px;
+
+    &-image {
+      margin: 80px 0;
+    }
+  }
+
+  &__success {
+    @include flexColumnNoWrapCenter;
+    padding: 60px 0;
+    gap: 100px;
+
+    &-content {
+      @include flexColumnNoWrapCenter;
+      border: 2px solid $border;
+      border-radius: 24px;
+      padding: 40px 40px 28px;
+      gap: 28px;
+      height: 320px;
+      width: 280px;
+      box-shadow: $shadow-modal;
+      transition: $transition;
+    }
+
+    &-image {
+      object-fit: contain;
+      border-radius: 8px;
+    }
+
+    &-title {
+      @include fontMedium16;
+      text-align: center;
+      color: rgba($color: $black, $alpha: 0.8);
+    }
+
+    &-buttons {
+      @include flexColumnNoWrapCenter;
+      gap: 16px;
+    }
+  }
+
+  &__navigate {
+    @include flexRowNoWrapBetween;
+    width: 100%;
+    max-width: 980px;
+    min-height: 120px;
+    margin: auto;
+    margin-bottom: 0;
+    padding: 40px 20px;
+    position: relative;
+    z-index: 2;
+
+    @media screen and (max-width: 650px) {
+      padding: 40px 20px 140px;
+    }
+
+    .MuiLinearProgress-root {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%);
+      width: 400px;
+      height: 8px;
+      border-radius: 13px;
+      background-color: rgba($color: $black, $alpha: 0.08);
+
+      @media screen and (max-width: 750px) {
+        width: 360px;
+      }
+
+      @media screen and (max-width: 700px) {
+        width: 320px;
+        top: 0;
+      }
+
+      @media screen and (max-width: 360px) {
+        width: 280px;
+        top: 8px;
+      }
+
+      >.MuiLinearProgress-bar {
+        background-color: $black;
+        border-radius: 13px;
+      }
+    }
+  }
+}

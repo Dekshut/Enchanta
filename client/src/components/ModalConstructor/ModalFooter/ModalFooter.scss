@@ -1,0 +1,12 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixin';
+
+.modal-footer {
+  width: 100%;
+
+  &__inner {
+    @include flexRowWrapStart;
+    gap: 24px;
+    width: 100%;
+  }
+}

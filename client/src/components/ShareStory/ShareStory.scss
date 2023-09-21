@@ -1,0 +1,171 @@
+@import '../../styles/variables';
+@import '../../styles/mixin';
+
+.share-story {
+  @include flexColumnNoWrapCenter;
+
+  &__image {
+    margin-bottom: 80px;
+  }
+
+  &__line {
+    display: inline-block;
+    margin: 31px 0 37px;
+    width: 64px;
+    height: 2px;
+    background-color: #E0E0E0;
+  }
+
+  &.share-story--modal {
+    box-sizing: border-box;
+    position: relative;
+    background-color: $white;
+    padding: 80px;
+    border-radius: 24px;
+    box-shadow: $shadow-modal;
+
+    .share-story__cover {
+      margin-bottom: 80px;
+      width: 120px;
+      height: 120px;
+    }
+
+    .share-story__text {
+      @include fontBold24;
+      width: 460px;
+
+      @media screen and (max-width: 500px) {
+        @include fontBold16;
+        font-size: 18px;
+        width: 340px;
+      }
+
+      @media screen and (max-width: 350px) {
+        @include fontBold16;
+        width: 280px;
+      }
+    }
+  }
+
+  &__cover {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 40px;
+  }
+
+  &__text {
+    @include fontBold16;
+    font-size: 18px;
+    text-align: center;
+    margin-bottom: 40px;
+    width: 300px;
+
+    @media screen and (max-width: 350px) {
+      width: 250px;
+      margin-bottom: 24px;
+      font-size: 16px;
+    }
+  }
+
+  &__social {
+    @include flexRowNoWrapCenter;
+    margin-bottom: 24px;
+
+    &.modalView {
+      margin-bottom: 16px;
+    }
+
+    button:first-of-type {
+      margin-right: 16px;
+
+      @media screen and (max-width: 350px) {
+        margin-right: 8px;
+      }
+    }
+  }
+
+  &__share-link {
+    @include flexRowNoWrapBetween;
+    width: 390px;
+    height: 48px;
+    border: 2px solid rgba(0, 0, 0, 0.12);
+    border-radius: 24px;
+
+    @media screen and (max-width: 440px) {
+      width: 370px;
+    }
+
+    @media screen and (max-width: 410px) {
+      width: 340px;
+    }
+
+    @media screen and (max-width: 380px) {
+      width: 310px;
+    }
+
+    @media screen and (max-width: 350px) {
+      width: 280px;
+    }
+
+    @media screen and (max-width: 320px) {
+      width: 250px;
+    }
+
+    &>span {
+      @include fontMedium16;
+      margin-left: 24px;
+      max-width: 300px;
+      overflow-x: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    &.modalView {
+      width: 300px;
+
+      &>span {
+        max-width: 220px;
+      }
+    }
+
+    &>button {
+      @include flexColumnNoWrapCenter;
+      width: 40px;
+      height: 40px;
+      margin-right: 4px;
+      background-color: $btn-light;
+      border-radius: 24px;
+      transition: $transition;
+
+      &:hover {
+        box-shadow: $shadow-button;
+
+        svg {
+          scale: 1.01;
+
+          >title {
+            display: none;
+          }
+        }
+      }
+
+      &:active {
+        box-shadow: inset $shadow-button;
+
+        svg {
+          scale: 0.99;
+
+          >title {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+
+  & button.primary-button {
+    svg path {
+      stroke: $white;
+    }
+  }
+}

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <g id="Webapp" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="n-wa-new_story-9-0-0" transform="translate(-644.000000, -924.000000)">
+            <g id="start_recording-btn" transform="translate(627.000000, 912.000000)">
+                <g id="record-icon" transform="translate(17.000000, 12.000000)">
+                    <polygon id="Path" points="0 0 24 0 24 24 0 24"></polygon>
+                    <rect id="Rectangle" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" x="9" y="2" width="6" height="11" rx="3"></rect>
+                    <path d="M5,10 C5,13.8659932 8.13400679,17 12,17 C15.8659932,17 19,13.8659932 19,10" id="Path" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                    <line x1="8" y1="21" x2="16" y2="21" id="Path" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></line>
+                    <line x1="12" y1="17" x2="12" y2="21" id="Path" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></line>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

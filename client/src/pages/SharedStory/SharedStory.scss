@@ -1,0 +1,73 @@
+@import '../../styles/variables';
+@import '../../styles/mixin';
+
+.shared {
+  @include flexColumnNoWrapCenter;
+  justify-content: flex-start;
+  overflow-x: hidden;
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+
+  &::before {
+    content: '';
+    position: absolute;
+    width: 100vw;
+    height: 120px;
+    top: 120px;
+    background: linear-gradient($white, rgba(255, 255, 255, 0));
+    z-index: 1;
+
+    @media screen and (max-width: 500px) {
+      top: 130px;
+    }
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    width: 100vw;
+    height: 120px;
+    bottom: 120px;
+    background: linear-gradient(rgba(255, 255, 255, 0), $white);
+    z-index: 1;
+
+    @media screen and (max-width: 950px) {
+      bottom: 119px;
+    }
+
+    @media screen and (max-width: 500px) {
+      bottom: 120px;
+    }
+  }
+
+  &__title {
+    position: absolute;
+    width: 100%;
+    left: 50%;
+    top: 0;
+    transform: translate(-50%);
+  }
+
+  &__content {
+    padding: 120px 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: 100%;
+    width: 100%;
+
+    @media screen and (max-width: 500px) {
+      margin-top: 20px;
+      padding: 0;
+    }
+  }
+
+  &__container {
+    @include flexColumnNoWrapCenter;
+    justify-content: flex-start;
+    max-width: 1400px;
+    gap: 100px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+}

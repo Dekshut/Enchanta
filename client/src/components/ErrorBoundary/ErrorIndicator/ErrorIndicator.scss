@@ -1,0 +1,28 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixin';
+
+.error-indicator {
+  @include flexColumnNoWrapCenter;
+  width: 100%;
+  max-width: 445px;
+  height: fit-content;
+  margin: 56px auto 24px;
+
+  &__inner {
+    @include flexColumnNoWrapCenter;
+    gap: 16px;
+  }
+
+  &__image {
+    margin-bottom: 48px;
+    max-width: 445px;
+    max-height: 346px;
+    width: 100%;
+    height: auto;
+  }
+
+  &__title,
+  &__text {
+    text-align: center;
+  }
+}

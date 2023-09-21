@@ -1,0 +1,73 @@
+@import '../../styles/variables';
+@import '../../styles/mixin';
+
+.story-title {
+  @include flexRowNoWrapCenter;
+  @include fontMedium16;
+  color: rgba($color: $black, $alpha: 0.4);
+  text-align: center;
+  border: 2px solid rgba($color: $black, $alpha: 0.12);
+  border-radius: 20px;
+  box-sizing: border-box;
+  position: absolute;
+  left: 50%;
+  top: 40px;
+  transform: translate(-50%);
+  padding: 8px 16px;
+  height: 40px;
+  cursor: default;
+
+  &.editable {
+    padding: 8px;
+  }
+
+  @media screen and (max-width: 500px) {
+    background-color: white;
+  }
+
+  @media screen and (max-width: 900px) {
+    top: 90px;
+    z-index: 3;
+    min-width: max-content;
+  }
+
+  &__tag {
+    @include fontMedium14;
+    color: $white;
+    border-radius: 12px;
+    background-color: $black;
+    padding: 4px 8.5px;
+    margin-right: 8px;
+  }
+
+  &__icon {
+    width: 24px;
+    height: 24px;
+    margin-left: 8px;
+    cursor: pointer;
+
+    &.edit {
+      opacity: 0.4;
+    }
+  }
+
+  &__discard {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    right: -32px;
+    cursor: pointer;
+  }
+
+  input {
+    padding: 0;
+    @include fontMedium16;
+    color: rgba($color: $black, $alpha: 1);
+    text-align: center;
+
+    &::placeholder {
+      @include fontMedium16;
+      color: rgba($color: $black, $alpha: 0.08);
+    }
+  }
+}

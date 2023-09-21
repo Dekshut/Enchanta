@@ -1,0 +1,58 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixin';
+
+.secondary-button {
+  @include flexRowNoWrapCenter;
+  @include fontMedium16;
+  text-align: center;
+  padding: 12px 16px;
+  color: $black;
+  background-color: rgba($color: $black, $alpha: 0.04);
+  border-radius: 24px;
+  gap: 8px;
+  height: fit-content;
+  transition: $transition;
+
+  &.thin {
+    padding: 8px 16px;
+    border-radius: 20px;
+  }
+
+  .MuiSvgIcon-root {
+    width: 16px;
+    height: 16px;
+    color: inherit;
+  }
+
+  >svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  &__text {
+    color: inherit;
+  }
+
+  &:hover {
+    box-shadow: $shadow-modal-button;
+  }
+
+  &:active {
+    box-shadow: inset $shadow-modal-button;
+  }
+
+  &:disabled {
+    color: $white;
+    box-shadow: none;
+    cursor: not-allowed;
+
+    >svg {
+      path,
+      line,
+      rect,
+      polygon {
+        stroke: $white;
+      }
+    }
+  }
+}

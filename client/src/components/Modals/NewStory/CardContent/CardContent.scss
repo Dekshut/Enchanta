@@ -1,0 +1,131 @@
+@import '../../../../styles/variables';
+@import '../../../../styles/mixin';
+
+.card {
+  &__list {
+    @include flexRowWrapCenter;
+    max-width: 940px;
+    width: 100%;
+    gap: 20px;
+  }
+
+  &__item {
+    max-width: 300px;
+    width: 100%;
+    height: 200px;
+    position: relative;
+    border-radius: 24px;
+    transition: $transition;
+
+    &:hover {
+      scale: 1.02;
+      box-shadow: $shadow-small-modal;
+    }
+
+    &:active {
+      scale: 1.01;
+      box-shadow: inset $shadow-modal, $shadow-small-modal;
+    }
+
+    .card-cover {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 24px;
+      z-index: -1;
+    }
+
+    &.main {
+      &::after {
+        content: '';
+        position: absolute;
+        max-width: 300px;
+        width: 100%;
+        height: 200px;
+        bottom: 0;
+        background: linear-gradient(rgba(0, 0, 0, 0) 0%,
+            rgba(0, 0, 0, 0.4) 58.22%,
+            rgba(0, 0, 0, 1) 100%);
+        border-radius: 24px;
+        z-index: -1;
+      }
+    }
+
+    &.all {
+      &::after {
+        content: '';
+        position: absolute;
+        max-width: 300px;
+        width: 100%;
+        height: 200px;
+        bottom: 0;
+        background: linear-gradient(rgba(0, 0, 0, 1) 0%,
+            rgba(0, 0, 0, 0.4) 20.99%,
+            rgba(0, 0, 0, 0.24) 33.98%,
+            rgba(0, 0, 0, 0) 49.2%,
+            rgba(0, 0, 0, 0.24) 64.39%,
+            rgba(0, 0, 0, 0.4) 78.46%,
+            rgba(0, 0, 0, 1) 100%);
+        border-radius: 24px;
+        z-index: -1;
+      }
+    }
+  }
+
+  &__button {
+    @include flexColumnNoWrapCenter;
+    justify-content: flex-end;
+    gap: 12px;
+    width: 100%;
+    height: 100%;
+    padding: 24px;
+    border-radius: 24px;
+    box-shadow: $shadow-modal;
+    transition: $transition;
+
+    &.no-selected {
+      &::before {
+        content: '';
+        position: absolute;
+        max-width: 300px;
+        width: 100%;
+        height: 200px;
+        bottom: 0;
+        background: $white;
+        opacity: 0.84;
+        border-radius: 24px;
+        z-index: 2;
+      }
+    }
+
+    &:hover {
+      scale: 1.02;
+    }
+
+    &:active {
+      scale: 1.01;
+    }
+  }
+
+  &__title {
+    @include fontBold14;
+    text-align: center;
+    color: rgba($color: $white, $alpha: 0.64);
+    margin-bottom: auto;
+  }
+
+  &__description {
+    @include fontHeavy16;
+    text-align: center;
+    color: $white;
+    max-width: 246px;
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    margin-top: 4px;
+  }
+}

@@ -1,0 +1,34 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixin';
+
+.confirm-record {
+  @include flexColumnNoWrapCenter;
+  gap: 40px;
+  box-sizing: border-box;
+  position: relative;
+  background-color: $white;
+  padding: 80px;
+  border-radius: 24px;
+  box-shadow: $shadow-modal;
+
+  &__title {
+    text-align: center;
+    margin-top: 40px;
+    margin-bottom: 24px;
+    max-width: 460px;
+  }
+
+  &__desc {
+    @include fontMedium14;
+    text-align: center;
+    padding: 0 12px;
+    color: rgba($color: $black, $alpha: 0.24);
+    max-width: 460px;
+  }
+
+  &__buttons {
+    @include flexRowNoWrapCenter;
+    gap: 16px;
+    max-width: 460px;
+  }
+}

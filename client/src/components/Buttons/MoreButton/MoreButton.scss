@@ -1,0 +1,42 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixin';
+
+.more-button {
+  transition: $transition;
+
+  &:hover {
+    scale: 1.03;
+  }
+
+  &:active {
+    scale: 1.01;
+  }
+
+  >.svg {
+    width: 40px;
+    height: 40px;
+    transition: $transition;
+  }
+
+  &.bg {
+    border-radius: 50%;
+    background-color: rgba($color: $black, $alpha: 0.04);
+    transition: $transition;
+
+    &:hover {
+      color: rgba($color: $black, $alpha: 0.9);
+    }
+
+    &:active {
+      background-color: rgba($color: $black, $alpha: 0.08);
+    }
+  }
+}
+
+.MuiModal-root {
+  @include flexRowNoWrapCenter;
+
+  .MuiBackdrop-root.MuiModal-backdrop {
+    background-color: rgba($color: $black, $alpha: 0.8);
+  }
+}

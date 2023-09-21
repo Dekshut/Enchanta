@@ -1,0 +1,81 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixin';
+
+.account-menu {
+  background-color: $white !important;
+  border: 2px solid $border;
+  border-radius: 20px !important;
+  box-shadow: $shadow-menu !important;
+  margin: 8px 0;
+  padding: 25px 23px !important;
+  min-width: 270px !important;
+  width: fit-content;
+  z-index: 3;
+
+  &__user {
+    @include flexColumnNoWrapCenter;
+    gap: 8px;
+
+    &-image {
+      object-fit: contain;
+      border-radius: 50%;
+    }
+
+    &-name {
+      @include fontMedium16;
+      color: rgba($color: $black, $alpha: 0.8);
+    }
+  }
+
+  &__item {
+    margin: 8px 0;
+    min-width: 222px;
+    width: fit-content;
+
+    &:first-child {
+      padding: 16px 0 16px 16px;
+      border-top: 1px solid $stroke;
+      border-bottom: 1px solid $stroke;
+      margin-top: 24px;
+      margin-bottom: 16px;
+      width: 100%;
+
+      .account-menu__button {
+        padding-left: 0;
+      }
+    }
+
+    &:last-child {
+      margin-bottom: 16px;
+    }
+  }
+
+  &__button {
+    padding: 12px 0 12px 16px;
+    @include flexRow;
+    justify-content: flex-start;
+    gap: 8px;
+
+    &-text {
+      @include fontMedium16;
+      color: $black;
+      transition: $transition;
+    }
+
+    .arrow {
+      width: 14px;
+      height: 14px;
+    }
+  }
+
+  &__footer {
+    @include flexRowNoWrapCenter;
+    gap: 12px;
+
+    &-link {
+      @include fontMedium12;
+      text-decoration: underline;
+      color: rgba($color: $black, $alpha: 0.24);
+    }
+  }
+}

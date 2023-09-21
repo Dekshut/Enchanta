@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <g id="Webapp" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="n-wa-new_story-18-1-0" transform="translate(-1170.000000, -430.000000)">
+            <g id="more-dd" transform="translate(1130.000000, 128.000000)">
+                <g id="visit" transform="translate(24.000000, 290.000000)">
+                    <g id="website-icon" transform="translate(16.000000, 12.000000)">
+                        <polygon id="Path" points="0 0 24 0 24 24 0 24"></polygon>
+                        <circle id="Oval" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" cx="12" cy="12" r="9"></circle>
+                        <line x1="3.6" y1="9" x2="20.4" y2="9" id="Path" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></line>
+                        <line x1="3.6" y1="15" x2="20.4" y2="15" id="Path" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></line>
+                        <path d="M11.5,3 C8.06294014,8.50777581 8.06294014,15.4922242 11.5,21" id="Path" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <path d="M12.5,3 C15.9370599,8.50777581 15.9370599,15.4922242 12.5,21" id="Path" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,102 @@
+@import '../../../../styles/variables';
+@import '../../../../styles/mixin';
+
+.custom-content {
+  @include flexColumnNoWrapCenter;
+  gap: 20px;
+  max-width: 500px;
+  padding: 0 20px;
+  width: 100%;
+  text-align: center;
+
+  .MuiFormControl-root {
+    width: 100%;
+    text-align: center;
+
+    .MuiFormLabel-root {
+      transition: top 0.3s cubic-bezier(0.4, 0, 0.2, 0.1) 0ms;
+
+      &[data-shrink='false'] {
+        @include fontMedium16;
+        color: rgba($color: $black, $alpha: 0.8);
+        text-align: center;
+        width: 100%;
+        top: 2px;
+      }
+
+      &[data-shrink='true'] {
+        @include fontMedium14;
+        line-height: 24px;
+        color: $black;
+        text-align: center;
+        left: 50%;
+        top: -12px;
+        transform: translate(-50%);
+      }
+    }
+
+    .MuiInputBase-root {
+      .MuiInputBase-input {
+        @include fontMedium16;
+        color: rgba($color: $black, $alpha: 0.8);
+        text-align: center;
+        padding: 20.5px;
+        width: 100%;
+      }
+
+      .MuiOutlinedInput-notchedOutline {
+        border: 2px solid $border;
+        border-radius: 24px;
+        text-align: center;
+        transition: $transition;
+
+        >legend {
+          font-size: 18px;
+        }
+      }
+
+      &.Mui-focused {
+        .MuiOutlinedInput-notchedOutline {
+          border-color: $black;
+        }
+      }
+
+      &:hover {
+        box-shadow: $shadow-modal;
+
+        .MuiOutlinedInput-notchedOutline {
+          border-color: $black;
+        }
+      }
+    }
+  }
+
+  &__button {
+    width: 100%;
+    padding: 18px;
+    border: 2px solid $border;
+    border-radius: 24px;
+    transition: $transition;
+
+    &-text {
+      @include fontMedium16;
+      color: rgba($color: $black, $alpha: 0.8);
+      text-align: center;
+      width: 100%;
+    }
+
+    &.selected {
+      background-color: rgba($color: $black, $alpha: 0.04);
+    }
+
+    &:hover {
+      border-color: $black;
+      box-shadow: $shadow-modal;
+    }
+
+    &:active {
+      border-color: $black;
+      box-shadow: inset $shadow-modal;
+    }
+  }
+}

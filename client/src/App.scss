@@ -1,0 +1,21 @@
+@import './styles/variables';
+@import './styles/mixin';
+@import './styles/reset';
+
+.title {
+  @include fontBold30;
+  color: $black;
+}
+
+.subtitle {
+  @include fontMedium14;
+  font-size: 16px;
+  color: rgba($color: $black, $alpha: 0.4);
+}
+
+.label {
+  @include fontMedium14;
+  text-transform: uppercase;
+  color: $grey09;
+  margin-bottom: 12px;
+}

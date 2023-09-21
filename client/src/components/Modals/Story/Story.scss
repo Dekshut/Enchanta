@@ -1,0 +1,121 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixin';
+
+.story {
+  @include flexColumnNoWrapCenter;
+  justify-content: flex-start;
+  overflow-x: hidden;
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+
+  &::before {
+    @media screen and (max-width: 500px) {
+      display: none;
+    }
+
+    content: '';
+    position: absolute;
+    width: 100vw;
+    height: 120px;
+    top: 120px;
+    background: linear-gradient($white, rgba(255, 255, 255, 0));
+    z-index: 3;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    width: 100vw;
+    height: 120px;
+    bottom: 120px;
+    background: linear-gradient(rgba(255, 255, 255, 0), $white);
+    z-index: 1;
+
+    @media screen and (max-width: 950px) {
+      bottom: 119px;
+    }
+
+    @media screen and (max-width: 650px) {
+      bottom: 199px;
+    }
+
+    @media screen and (max-width: 500px) {
+      bottom: 210px;
+    }
+  }
+
+  &.record {
+    &::after {
+      @media screen and (max-width: 500px) {
+        bottom: 170px;
+      }
+    }
+  }
+
+  &.listen {
+    &::after {
+      @media screen and (max-width: 500px) {
+        bottom: 195px;
+      }
+    }
+  }
+
+  &.editListen {
+    &::after {
+      @media screen and (max-width: 500px) {
+        display: none;
+      }
+    }
+  }
+
+  &.all {
+    &::after {
+      bottom: 0;
+    }
+  }
+
+  &__content {
+    @media screen and (max-width: 500px) {
+      margin-top: 50px;
+      padding: 0;
+    }
+
+    padding: 120px 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: 100%;
+    width: 100%;
+  }
+
+  &__container {
+    @include flexColumnNoWrapCenter;
+    justify-content: flex-start;
+    max-width: 1400px;
+    gap: 100px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  &__finish-record {
+    @include flexColumnNoWrapCenter;
+    justify-content: flex-start;
+    width: 100%;
+    padding: 70px 0;
+
+    @media screen and (max-width: 500px) {
+      margin-top: 60px;
+      padding: 0;
+
+      img {
+        width: 250px !important;
+        height: auto;
+      }
+    }
+
+    &-image {
+      object-fit: contain;
+      border-radius: 24px;
+    }
+  }
+}

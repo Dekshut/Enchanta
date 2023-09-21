@@ -1,0 +1,53 @@
+@import '../../styles/variables';
+@import '../../styles/mixin';
+
+.outline {
+  display: block;
+  position: absolute;
+  border: 2px solid #aeaeae;
+  border-radius: 5px;
+  width: calc(100% - 60px);
+  height: calc(100% - 60px);
+  top: 30px;
+  left: 30px;
+
+  &.edit-portrait {
+    top: -20px;
+    left: -20px;
+    width: calc(100% + 40px);
+    height: calc(100% + 20px);
+
+    @media screen and (max-width: 850px) {
+      border: none;
+    }
+  }
+}
+
+.editable-paragraph {
+  @include fontCaslon34;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border: none;
+  padding: 0;
+  height: 386px;
+  overflow-y: auto;
+  scrollbar-width: none;
+  resize: none;
+  margin-bottom: -10px;
+
+  @media screen and (max-width: 850px) {
+    height: 346px;
+    background-color: rgba($color: $black, $alpha: 0.04);
+    border-radius: 24px;
+    padding: 4px;
+  }
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}

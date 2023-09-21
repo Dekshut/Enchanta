@@ -1,0 +1,22 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixin';
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: $white;
+  z-index: 2;
+
+  &__inner {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+}

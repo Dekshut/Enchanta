@@ -1,0 +1,53 @@
+@import '../../styles/variables';
+@import '../../styles/mixin';
+
+.story-item-add {
+  @include flexColumnNoWrapCenter;
+  border-radius: 24px;
+  background-color: $border02;
+  border: 2px solid $border02;
+  padding: 28px 40px;
+  gap: 16px;
+  box-shadow: $shadow-modal;
+  transition: $transition;
+  height: 320px;
+  width: 280px;
+
+  svg {
+    width: 80px;
+    height: 80px;
+    color: $black;
+    margin: auto 0;
+    transition: $transition;
+  }
+
+  &__text {
+    @include fontMedium16;
+    color: rgba($color: $black, $alpha: 0.8);
+  }
+
+  &:hover {
+    box-shadow: $shadow-small-modal;
+    background-color: $stroke;
+    border-color: $stroke;
+
+    svg {
+      color: $black;
+      scale: 1.1;
+    }
+
+    .story-item-add__text {
+      color: $black;
+    }
+  }
+
+  &:active {
+    box-shadow: inset $shadow-small-modal, $shadow-modal;
+    background-color: $stroke;
+    border-color: $stroke;
+
+    // svg {
+    //   scale: 0.95;
+    // }
+  }
+}

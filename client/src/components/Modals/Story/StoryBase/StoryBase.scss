@@ -1,0 +1,50 @@
+@import '../../../../styles/variables';
+@import '../../../../styles/mixin';
+
+.story-base {
+  &__header {
+    @include flexColumnNoWrapCenter;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+
+  &__title {
+    text-align: center;
+  }
+
+  &__desc {
+    text-align: center;
+    padding: 0 32px;
+  }
+
+  &__content {
+    @include flexColumnNoWrapCenter;
+    border: 2px solid $border;
+    border-radius: 24px;
+    padding: 40px 40px 28px;
+    gap: 28px;
+    height: 320px;
+    width: 280px;
+    box-shadow: $shadow-modal;
+    transition: $transition;
+
+    &-image {
+      object-fit: contain;
+      border-radius: 8px;
+    }
+
+    &-title {
+      @include fontMedium16;
+      text-align: center;
+      color: rgba($color: $black, $alpha: 0.8);
+    }
+  }
+
+  &__buttons {
+    @media screen and (max-width: 500px) {
+        margin-bottom: 120px;
+    }
+    @include flexColumnNoWrapCenter;
+    gap: 16px;
+  }
+}

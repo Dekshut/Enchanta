@@ -1,0 +1,13 @@
+@import '../../styles/variables';
+@import '../../styles/mixin';
+
+.user-stories {
+  @include flexColumn;
+  gap: 60px;
+
+  &__list {
+    @include flexRowWrapStart;
+    width: 100%;
+    gap: 20px;
+  }
+}

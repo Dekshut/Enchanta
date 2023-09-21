@@ -1,0 +1,10 @@
+.listen-story {
+  @media screen and (max-width: 500px) {
+    margin-top: 50px;
+    height: auto;
+    img {
+      width: 250px !important;
+      height: auto !important;
+    }
+  }
+}

@@ -1,0 +1,54 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixin';
+
+.change-image-button {
+  @include flexRowNoWrapCenter;
+  position: absolute;
+  top: 440px;
+  right: -40px;
+  height: 48px;
+  padding: 16px 12px;
+
+  @include fontMedium16;
+  color: $btn;
+
+  &>span {
+    width: 24px;
+    height: 24px;
+    margin-right: 8px;
+    transform: translateY(-1px);
+  }
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  &.edit-portrait {
+    top: 43%;
+    right: -40%;
+    bottom: auto;
+
+    @media screen and (max-width: 850px) {
+      top: auto;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 30px;
+    }
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+
+  &.listen {
+    position: relative;
+    top: 16px;
+    right: auto;
+    left: 50%;
+    transform: translate(-50%);
+  }
+}

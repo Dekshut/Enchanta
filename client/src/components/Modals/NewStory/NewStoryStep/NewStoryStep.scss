@@ -1,0 +1,33 @@
+@import '../../../../styles/variables';
+@import '../../../../styles/mixin';
+
+.new-story-step {
+  width: 100vw;
+
+  &__container {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 20px;
+    height: fit-content;
+  }
+
+  &__header {
+    @include flexColumnNoWrapCenter;
+    gap: 16px;
+    margin-bottom: 60px;
+  }
+
+  &__title {
+    text-align: center;
+  }
+
+  &__desc {
+    text-align: center;
+    padding: 0 32px;
+  }
+
+  &__content {
+    @include flexRowNoWrapCenter;
+  }
+}

@@ -1,0 +1,56 @@
+@import '../../styles/variables';
+@import '../../styles/mixin';
+
+.view-switch {
+  position: relative;
+  display: inline-block;
+  width: 80px;
+  height: 40px;
+  border-radius: 20px;
+  background-color: $btn-light;
+
+  .view-mode {
+    width: 100%;
+    height: 100%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    position: absolute;
+    padding: 4px;
+    cursor: pointer;
+
+    &::before {
+      content: '';
+      position: absolute;
+      width: 32px;
+      height: 32px;
+      border-radius: 20px;
+      background-color: $white;
+      z-index: 1;
+      transition: 0.5s;
+    }
+  }
+
+  .view-mode--portrait::before {
+    transform: translateX(calc(100% + 8px));
+  }
+
+  &__icon {
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    padding: 8px;
+    z-index: 2;
+    opacity: 0.25;
+
+    svg {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  &__icon.active {
+    opacity: 1;
+    transition: opacity 0.5s;
+  }
+}

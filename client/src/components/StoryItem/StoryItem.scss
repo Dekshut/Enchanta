@@ -1,0 +1,65 @@
+@import '../../styles/variables';
+@import '../../styles/mixin';
+
+.story-item {
+  position: relative;
+  transition: $transition;
+
+  &__more {
+    position: absolute;
+    z-index: 1;
+    right: 18px;
+    top: 18px;
+  }
+
+  .more-button {
+    border: 2px solid $border02;
+    border-radius: 50%;
+    box-shadow: 0 4px 8px 0 rgba($color: $black, $alpha: 0.04);
+    background-color: $white;
+    z-index: 1;
+    opacity: 0;
+
+    &.open {
+      opacity: 1;
+    }
+  }
+
+  &:hover,
+  &:active {
+    .more-button {
+      opacity: 1;
+    }
+  }
+
+  &__button {
+    @include flexColumnNoWrapCenter;
+    border: 2px solid $border;
+    border-radius: 24px;
+    padding: 40px 40px 28px;
+    gap: 28px;
+    height: 320px;
+    width: 280px;
+    box-shadow: $shadow-modal;
+    transition: $transition;
+
+    &:hover {
+      box-shadow: $shadow-small-modal;
+    }
+
+    &:active {
+      box-shadow: inset $shadow-modal, $shadow-small-modal;
+    }
+  }
+
+  &__image {
+    object-fit: contain;
+    border-radius: 8px;
+  }
+
+  &__title {
+    @include fontMedium16;
+    text-align: center;
+    color: rgba($color: $black, $alpha: 0.8);
+  }
+}

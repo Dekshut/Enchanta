@@ -1,0 +1,236 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixin';
+
+.subscription-plan {
+  @include flexColumnNoWrapCenter;
+  justify-content: flex-start;
+  overflow-x: hidden;
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+
+  &::before {
+    content: '';
+    position: absolute;
+    width: 100vw;
+    height: 120px;
+    top: 120px;
+    background: linear-gradient($white, rgba(255, 255, 255, 0));
+    z-index: 1;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    width: 100vw;
+    height: 120px;
+    bottom: 0;
+    background: linear-gradient(rgba(255, 255, 255, 0), $white);
+    z-index: 1;
+  }
+
+  &__content {
+    padding: 120px 0 240px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: 100%;
+    width: 100%;
+  }
+
+  &__inner {
+    @include flexColumnNoWrapCenter;
+    gap: 20px;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  &__header {
+    @include flexColumnNoWrapCenter;
+    gap: 16px;
+  }
+
+  &__title {
+    text-align: center;
+  }
+
+  &__subtitle {
+    text-align: center;
+    padding: 0 32px;
+  }
+
+  &__list {
+    @include flexRowWrapCenter;
+    max-width: 900px;
+    width: 100%;
+    gap: 30px;
+  }
+
+  &__item {
+    @include flexColumnNoWrapCenter;
+    gap: 24px;
+    max-width: 280px;
+    width: 100%;
+    box-shadow: $shadow-modal;
+    transition: $transition;
+    padding: 39px 19px;
+    border: 2px solid $border;
+    border-radius: 24px;
+    position: relative;
+
+    &:hover {
+      box-shadow: $shadow-small-modal;
+      scale: 1.02;
+    }
+
+    &-title {
+      @include fontHeavy16;
+      text-align: center;
+      color: $black;
+      margin-bottom: 8px;
+    }
+
+    &-image {
+      margin: -12px 0;
+    }
+
+    &-helper {
+      position: absolute;
+      top: -2px;
+      left: 50%;
+      transform: translate(-50%);
+      border-radius: 0 0 10px 10px;
+      background-color: $black;
+      width: max-content;
+
+      &-text {
+        @include fontHeavy10;
+        text-transform: uppercase;
+        color: $white;
+        padding: 4px 16px;
+      }
+    }
+  }
+
+  &__pricing {
+
+    &-cost {
+      display: flex;
+      justify-content: center;
+      gap: 4.5px;
+      margin-right: 12px;
+    }
+
+    &-currency {
+      @include fontBold16;
+      margin-top: 4.5px;
+    }
+
+    &-value {
+      @include fontHeavy40;
+      vertical-align: middle;
+      vertical-align: -webkit-baseline-middle;
+    }
+
+    &-period {
+      @include fontMedium16;
+      color: rgba($color: $black, $alpha: 0.24);
+    }
+  }
+
+  &__devider {
+    border: 1px solid $border;
+    width: 40px;
+  }
+
+  &__desc {
+    @include flexColumnNoWrapCenter;
+    gap: 8px;
+    margin-bottom: 2px;
+
+    &-item {
+      @include fontMedium16;
+      text-align: center;
+      color: rgba($color: $black, $alpha: 0.8);
+
+      &--heavy {
+        @include fontHeavy16;
+      }
+    }
+  }
+
+  &__tabs {
+    position: relative;
+    margin: 20px 0;
+
+    @media screen and (max-width: 500px) {
+      width: 100vw;
+      padding: 0 12px;
+    }
+
+    &-helper {
+      position: absolute;
+      top: -18px;
+      left: 50%;
+      transform: translate(-50%);
+      border-radius: 10px 10px 0 0;
+      background-color: $black;
+
+      &-text {
+        @include fontHeavy10;
+        text-transform: uppercase;
+        color: $white;
+        padding: 4px 16px;
+      }
+    }
+
+    &::after {
+      position: absolute;
+      content: '';
+      border-color: $black transparent transparent transparent;
+      border-style: solid;
+      border-width: 4px 6px 4px 6px;
+      height: 0px;
+      width: 0px;
+      top: 0;
+      left: 50%;
+      transform: translate(-50%);
+    }
+
+    &-list {
+
+      @media screen and (max-width: 500px) {
+        padding: 8px 10px;
+        justify-content: space-between;
+      }
+      @include flexRowNoWrapCenter;
+      gap: 8px;
+      padding: 8px;
+      border: 2px solid $border;
+      border-radius: 28px;
+      background-color: $white;
+    }
+
+    &-button {
+
+      @media screen and (max-width: 500px) {
+        width: auto;
+      }
+
+      @include fontRegular16;
+      color: rgba($color: $black, $alpha: 0.4);
+      width: 156px;
+      align-items: center;
+      justify-content: center;
+      padding: 4px;
+      border-radius: 17px;
+      transition: $transition;
+
+      &.selected {
+        background-color: $bg;
+        color: $black;
+      }
+    }
+  }
+}

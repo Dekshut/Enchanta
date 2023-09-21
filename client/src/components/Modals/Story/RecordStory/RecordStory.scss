@@ -1,0 +1,101 @@
+@import '../../../../styles/variables';
+@import '../../../../styles/mixin';
+
+.record-story {
+  @include flexColumnNoWrapCenter;
+  justify-content: flex-start;
+  width: 100%;
+  position: relative;
+
+  &__overlay {
+    @include flexRowNoWrapBetween;
+    width: 940px;
+    padding: 40px 0;
+    position: relative;
+
+    @media screen and (max-width: 500px) {
+      width: 100%;
+      padding: 12px 0 120px;
+
+      >.secondary-button.thin {
+        margin-left: -24px;
+        margin-right: 8px;
+      }
+    }
+
+    &-recording {
+      position: absolute;
+      bottom: 120px;
+      left: 50%;
+      transform: translate(-50%);
+      z-index: 2;
+
+      @media screen and (max-width: 500px) {
+        bottom: 275px;
+
+        &>button {
+          transform: translateY(105px);
+        }
+     }
+
+      &--paused {
+        @include fontMedium14;
+        color: rgba($color: $black, $alpha: 0.24);
+        border-radius: 12px;
+        padding: 4px 8px;
+        background-color: $btn-light;
+
+        @media screen and (max-width: 500px) {
+          transform: translate(75px, 108px);
+        }
+      }
+      &--start {
+        @media screen and (max-width: 500px) {
+          transform: translate(75px, 108px);
+        }
+
+        @include fontMedium14;
+        color: $white;
+        border-radius: 12px;
+        padding: 4px 8px 4px 20px;
+        position: relative;
+        background-color: $black;
+
+        &::before {
+          content: '';
+          position: absolute;
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
+          left: 8px;
+          top: 50%;
+          transform: translateY(-50%);
+          background-color: $red;
+        }
+      }
+    }
+    &-controller {
+      @include flexRowNoWrapBetween;
+      margin: 0 auto 0 132px;
+
+      @media screen and (max-width: 500px) {
+        width: 200px !important;
+        margin: 0;
+      }
+
+      &-time {
+        @include fontBold16;
+        text-align: center;
+        color: $black;
+        opacity: 0.24;
+        width: 50px;
+
+        @media screen and (max-width: 500px) {
+          position: absolute;
+          transform: translateY(-40px) translateX(-25px);
+          z-index: 4;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,134 @@
+@import '../../styles/variables';
+@import '../../styles/mixin';
+
+.audio-player {
+  position: absolute;
+  z-index: 2;
+  left: 50%;
+  transform: translate(-50%);
+  bottom: 48px;
+  @include flexColumnNoWrapCenter;
+  justify-content: flex-end;
+  height: 154px;
+  width: 450px;
+
+  @media screen and (max-width: 500px) {
+    width: 320px!important;
+    bottom: 180px;
+  }
+
+  &__inner {
+    position: relative;
+    height: 154px;
+    width: 450px;
+    @include flexColumnNoWrapCenter;
+    justify-content: space-between;
+    @media screen and (max-width: 500px) {
+      height: 120px!important;
+    }
+  }
+
+  &__meta {
+    visibility: hidden;
+    width: 0;
+    height: 0;
+    z-index: -1;
+    position: absolute;
+  }
+
+  &__buttons {
+    @include flexRowNoWrapCenter;
+    gap: 24px;
+    padding-top: 2px;
+  }
+
+  &__button {
+    transition: $transition;
+    scale: 1;
+
+    &:hover {
+      scale: 1.02;
+    }
+
+    &:active {
+      scale: 0.99;
+    }
+
+    &-play {
+      background-color: $black;
+      border-radius: 50%;
+      padding: 20px;
+    }
+  }
+
+  &__timeline {
+    @include flexRowNoWrapCenter;
+    gap: 16px;
+    width: 382px;
+    height: 24px;
+
+    @media screen and (max-width: 500px) {
+      width: calc(100% - 130px)!important;
+    }
+
+
+    &-time {
+      @include fontMedium16;
+      color: rgba($color: $black, $alpha: 0.24);
+      width: 47px;
+    }
+
+    &-range {
+      width: 256px;
+      -webkit-appearance: none;
+      appearance: none;
+      background: transparent;
+      cursor: pointer;
+      overflow: hidden;
+      border-radius: 13px;
+
+      &::-webkit-slider-runnable-track {
+        background-color: rgba($color: $black, $alpha: 0.08);
+        height: 8px;
+        border-radius: 13px;
+      }
+
+      &::-moz-range-track {
+        background-color: rgba($color: $black, $alpha: 0.08);
+        height: 8px;
+        border-radius: 13px;
+        overflow: hidden;
+      }
+
+      &::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        margin-top: 0;
+        background-color: $black;
+        height: 8px;
+        width: 8px;
+        border-radius: 50%;
+      }
+
+      &::-moz-range-thumb {
+        border: none;
+        border-radius: 50%;
+        background-color: $black;
+        height: 12px;
+        width: 12px;
+      }
+
+      &::-moz-range-progress,
+      &::-ms-fill-lower {
+        background: $black;
+      }
+
+      &::-webkit-slider-thumb {
+        width: 8px;
+        height: 8px;
+        box-shadow: -160px 0px 0 155px $black;
+        border-radius: 50% !important;
+    }
+    }
+  }
+}

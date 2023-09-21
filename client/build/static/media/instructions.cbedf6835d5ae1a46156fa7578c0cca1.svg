@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <g id="Webapp" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="n-wa-new_story-9-0-0" transform="translate(-266.000000, -1008.000000)">
+            <g id="bot-nav" transform="translate(0.000000, 960.000000)">
+                <g id="instructions-btn" transform="translate(250.000000, 40.000000)">
+                    <g id="instructions-icon" transform="translate(16.000000, 8.000000)">
+                        <polygon id="Path" points="0 0 24 0 24 24 0 24"></polygon>
+                        <circle id="Oval" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" cx="12" cy="12" r="9"></circle>
+                        <line x1="12" y1="8" x2="12.01" y2="8" id="Path" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></line>
+                        <polyline id="Path" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="11 12 12 12 12 16 13 16"></polyline>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
