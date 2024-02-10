@@ -29,6 +29,7 @@ export class AuthController {
       res.cookie('jwtToken', response.jwtToken, {
         maxAge: 168 * 60 * 60 * 1000,
       });
+      console.log(true);
       return res.redirect(
         `http${PORT === 8000 ? '' : 's'}://${await this.configService.get(
           'HOST',

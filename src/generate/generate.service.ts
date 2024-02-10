@@ -5,8 +5,8 @@ import { childAge, storyType } from '../entities/intefaces/story.interface';
 
 @Injectable()
 export class GenerateService {
-  private apiKey = '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';
-  private openAi: any;
+  private apiKey = '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';
+  private openAi: OpenAIApi;
   private openAiConfig = {
     model: 'text-davinci-003',
     temperature: 0.7,
@@ -210,6 +210,8 @@ export class GenerateService {
       story = null;
 
     const { prompt, storyGroup } = this.getStoryPrompt(body);
+
+    console.log(prompt);
 
     do {
       err = null;
