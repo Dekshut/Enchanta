@@ -21,7 +21,7 @@ export const setUserCastomCards = (
     'Random name',
     'Random details',
   ];
-  const value = userValue.length ? userValue : 'Enchanta choice';
+  const value = userValue.length ? userValue : 'a random choice';
 
   const isCard = allCards.find((card: Cards) => types.includes(card.type));
   if (isCard) {

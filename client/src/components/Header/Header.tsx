@@ -15,15 +15,11 @@ import './Header.scss';
 function Header({ isShared }: { isShared?: boolean }) {
   const [showBunner, setShowBunner] = useState<boolean>(false);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const {
-    storiesLeft,
-    getUserCredits,
-  } = useSubscriptionStore((state: ISubscriptionStore & ISubscriptionActions) =>
-    state, shallow);
-  const {
-    avatar,
-    setUser,
-  } = useUserStore();
+  const { storiesLeft, getUserCredits } = useSubscriptionStore(
+    (state: ISubscriptionStore & ISubscriptionActions) => state,
+    shallow,
+  );
+  const { avatar, setUser } = useUserStore();
   const { resetReadStory } = useStoryStore();
 
   const open = Boolean(anchorEl);
@@ -39,14 +35,11 @@ function Header({ isShared }: { isShared?: boolean }) {
   }, [getUserCredits, setUser]);
 
   useEffect(() => {
-    storiesLeft ?
-      setShowBunner(false) :
-      setShowBunner(true);
+    storiesLeft ? setShowBunner(false) : setShowBunner(true);
   }, [storiesLeft]);
 
   const toggleAccountMenu = (event: MouseEvent<HTMLElement>): void => {
-    anchorEl ? setAnchorEl(null) :
-      setAnchorEl(event.currentTarget);
+    anchorEl ? setAnchorEl(null) : setAnchorEl(event.currentTarget);
   };
 
   const onClosePopup = () => {
@@ -76,31 +69,32 @@ function Header({ isShared }: { isShared?: boolean }) {
   return (
     <>
       <AnimatePresence mode="wait">
-        {isShared ? null :
-          <>{showBunner &&
-            <motion.aside
-              className="bunner"
-              variants={bunner}
-              initial="initial"
-              animate="animate"
-              exit="exit"
-            >
-              <p className="bunner__text">
-                Unlock your powers to generate even more
-                stories with a premium subscription.
-              </p>
-              <button
-                type="button"
-                className="bunner__button"
-                onClick={() => openSubscriptionPlan()}
+        {isShared ? null : (
+          <>
+            {showBunner && (
+              <motion.aside
+                className="bunner"
+                variants={bunner}
+                initial="initial"
+                animate="animate"
+                exit="exit"
               >
-                <span className="bunner__button-text">
-                  Subscribe Now
-                </span>
-                <ArrowForwardRounded />
-              </button>
-            </motion.aside>}
-          </>}
+                <p className="bunner__text">
+                  Unlock your powers to generate even more stories with a
+                  premium subscription.
+                </p>
+                <button
+                  type="button"
+                  className="bunner__button"
+                  onClick={() => openSubscriptionPlan()}
+                >
+                  <span className="bunner__button-text">Subscribe Now</span>
+                  <ArrowForwardRounded />
+                </button>
+              </motion.aside>
+            )}
+          </>
+        )}
       </AnimatePresence>
       <header className="header">
         <div className="header__container">
@@ -113,56 +107,66 @@ function Header({ isShared }: { isShared?: boolean }) {
                   type="button"
                 >
                   <Logo />
+                  <div className="menu__item logo__text"> Enchanta</div>
                 </button>
               </li>
-              {
-                isShared
-                  ? <>
-                    <li className="menu__item create_own_story">
-                      <PrimaryButton
-                        thin
-                        text="Create Your Own Story"
-                        onClick={() => navigate('/sign-in')}
-                        iconPosition="none" />
-                    </li>
-                  </>
-                  : <>
-                    <li className="menu__item">
-                      <span className="menu__item-story-count">
-                        {storiesLeft}
-                      </span>
-                      <span className="menu__item-story-desc">
-                        {storiesLeft === 1 ? 'story' : 'stories'} left
-                      </span>
-                    </li>
-                    <li className="menu__item">
-                      <button
-                        data-testid="toggleAccountMenu-button"
-                        className="menu__button"
-                        type="button"
-                        onClick={toggleAccountMenu}
-                      >
-                        {avatar ?
-                          <>{getImage(
-                            avatar, 'avatar', '40', '40',
+              {isShared ? (
+                <>
+                  <li className="menu__item create_own_story">
+                    <PrimaryButton
+                      thin
+                      text="Create Your Own Story"
+                      onClick={() => navigate('/sign-in')}
+                      iconPosition="none"
+                    />
+                  </li>
+                </>
+              ) : (
+                <>
+                  <li className="menu__item">
+                    <span className="menu__item-story-count">
+                      {storiesLeft}
+                    </span>
+                    <span className="menu__item-story-desc">
+                      {storiesLeft === 1 ? 'story' : 'stories'} left
+                    </span>
+                  </li>
+                  <li className="menu__item">
+                    <button
+                      data-testid="toggleAccountMenu-button"
+                      className="menu__button"
+                      type="button"
+                      onClick={toggleAccountMenu}
+                    >
+                      {avatar ? (
+                        <>
+                          {getImage(
+                            avatar,
+                            'avatar',
+                            '40',
+                            '40',
                             'menu__item-button avatar',
-                          )}</> :
-                          <User
-                            className={`menu__item-button user${open ?
-                              ' active' : ''}`}
-                          />}
-                      </button>
-                      <AccountMenu
-                        open={open}
-                        anchorEl={anchorEl}
-                        onToggle={toggleAccountMenu}
-                        isSubscribe={!!storiesLeft}
-                        openSubscriptionPlan={openSubscriptionPlan}
-                        onClosePopup={onClosePopup}
-                      />
-                    </li>
-                  </>
-              }
+                          )}
+                        </>
+                      ) : (
+                        <User
+                          className={`menu__item-button user${
+                            open ? ' active' : ''
+                          }`}
+                        />
+                      )}
+                    </button>
+                    <AccountMenu
+                      open={open}
+                      anchorEl={anchorEl}
+                      onToggle={toggleAccountMenu}
+                      isSubscribe={!!storiesLeft}
+                      openSubscriptionPlan={openSubscriptionPlan}
+                      onClosePopup={onClosePopup}
+                    />
+                  </li>
+                </>
+              )}
             </ul>
           </nav>
         </div>

@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { AnimatePresence } from 'framer-motion';
-import { Configuration, OpenAIApi } from 'openai';
 import React, { useEffect } from 'react';
 
 import { useNavigate, useSearchParams } from 'react-router-dom';
@@ -17,43 +16,9 @@ import {
   useUserStore,
 } from '../../store';
 
-const prompt =
-  'Create a rhyming counting story appropriate for children ages 0-2. The story should alternatively count to 3 or 5 using words like "one, two, buckle my shoe" or "one, two, three, listen to me". The story should feature objects or items familiar to young children, such as toys, foods, or clothing items. On every line must be up to 8 words. The length of story should be minimum 50 words. The story should rhyme and use repetition to make it easy for children to follow along.';
-
-const openAi = new OpenAIApi(
-  new Configuration({
-    apiKey: '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',
-  }),
-);
-
-const openAiConfig = {
-  model: 'davinci-002',
-  temperature: 0.7,
-  max_tokens: 3000,
-  top_p: 1.0,
-  frequency_penalty: 0,
-  presence_penalty: 0,
-};
-
-// const openAi = new OpenAI({ apiKey, dangerouslyAllowBrowser: true });
+import './Dashboard.scss';
 
 const updateTime = () => axios.post(`${API}/api/user/session-time`, {}, config);
-
-const onClick = async () => {
-  const result = await openAi.createCompletion({
-    ...openAiConfig,
-    prompt: `${prompt}`,
-  });
-
-  console.log(result);
-};
-// openAi.images.generate({
-//   prompt:
-//     'An idyllic town with Enchanta, a cheerful girl, standing in front of her magical, stardust-covered house.',
-//   n: 1,
-//   size: '256x256',
-//   response_format: 'b64_json',
-// }),
 
 function Dashboard() {
   const navigate = useNavigate();
@@ -132,7 +97,6 @@ function Dashboard() {
             )}
           </div>
         </div>
-        <button onClick={onClick}>Generate</button>
       </main>
       <AnimatePresence mode="wait">
         {!!createStory && <NewStory />}

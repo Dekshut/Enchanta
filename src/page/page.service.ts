@@ -4,18 +4,18 @@ import { PageEntity } from '../entities/page.entity';
 import { deletePage } from './dto/delete-page.dto';
 import { Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
-import { Configuration, OpenAIApi } from 'openai';
+// import { Configuration, OpenAIApi } from 'openai';
 import * as GCloudStorage from '@google-cloud/storage';
 import { UserEntity } from '../entities/user.entity';
 import { ActionType, StatisticService } from '../statistic/statistic.service';
+import OpenAI from 'openai';
 
 @Injectable()
 export class PageService {
   private storage = new GCloudStorage.Storage({
     projectId: 'vocal-entity-375810',
   });
-  private secretKey = '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';
-  private openAi: any;
+  private openAi: OpenAI;
   constructor(
     @InjectRepository(UserEntity)
     private readonly userRepository: Repository<UserEntity>,
@@ -24,11 +24,9 @@ export class PageService {
 
     private readonly statisticService: StatisticService,
   ) {
-    this.openAi = new OpenAIApi(
-      new Configuration({
-        apiKey: this.secretKey,
-      }),
-    );
+    this.openAi = new OpenAI({
+      apiKey: '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',
+    });
   }
 
   async deletePage(body: deletePage, email) {
@@ -56,7 +54,7 @@ export class PageService {
         return existImages[Math.floor(Math.random() * existImages.length)];
       }
 
-      const imageGenerateResult = await this.openAi.createImage({
+      const imageGenerateResult = await this.openAi.images.generate({
         prompt: `${page.image_prompt} character`,
         n: 1,
         size: '256x256',
@@ -64,7 +62,7 @@ export class PageService {
       });
 
       const image =
-        `data:image/png;base64,` + imageGenerateResult.data.data[0]?.b64_json;
+        `data:image/png;base64,` + imageGenerateResult.data[0].b64_json;
 
       const imageBuffer = this.decodeBase64Image(image);
 

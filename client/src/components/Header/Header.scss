@@ -3,14 +3,16 @@
 
 .bunner {
   @include flexRowNoWrapCenter;
-  background: linear-gradient(90deg,
-      #1E3151 0%,
-      #24375B 12.66%,
-      #476398 36.92%,
-      #5C619D 50.55%,
-      #A75990 71.41%,
-      #FE8558 86.77%,
-      #FFDA73 100%);
+  background: linear-gradient(
+    90deg,
+    #1e3151 0%,
+    #24375b 12.66%,
+    #476398 36.92%,
+    #5c619d 50.55%,
+    #a75990 71.41%,
+    #fe8558 86.77%,
+    #ffda73 100%
+  );
   width: 100vw;
   padding: 12px;
   gap: 16px;
@@ -44,6 +46,10 @@
   cursor: pointer;
 }
 
+.logo__text {
+  @include fontBold24;
+}
+
 .header {
   width: 100vw;
   height: fit-content;
@@ -65,7 +71,7 @@
       @include flexRow;
       justify-content: space-between;
       gap: 24px;
-  
+
       @media screen and (max-width: 500px) {
         gap: 8px;
       }

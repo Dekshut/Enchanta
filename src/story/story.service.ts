@@ -12,6 +12,10 @@ import { FeedbackEntity } from '../entities/feedback.entity';
 import * as GCloudStorage from '@google-cloud/storage';
 import { ActionType, StatisticService } from 'src/statistic/statistic.service';
 import { GenerateService } from '../generate/generate.service';
+import { title } from 'node:process';
+import { v2 as cloudinaryV2, UploadApiResponse } from 'cloudinary';
+import { ILLUSTRATION_STYLES } from 'src/generate/generate.constants';
+const fs = require('fs');
 
 @Injectable()
 export class StoryService {
@@ -37,11 +41,29 @@ export class StoryService {
     private readonly generateService: GenerateService,
   ) {}
 
+  private async uploadToCloudinary(
+    imageBuffer: Buffer,
+  ): Promise<UploadApiResponse> {
+    return new Promise<UploadApiResponse>((resolve, reject) => {
+      cloudinaryV2.uploader
+        .upload_stream(
+          {
+            folder: 'Home',
+          },
+          (error, result: UploadApiResponse) => {
+            if (error) {
+              reject(error);
+            } else {
+              resolve(result);
+            }
+          },
+        )
+        .end(imageBuffer);
+    });
+  }
   async generateStory(body: createStoryDto, email: string) {
     const user = await this.userRepository.findOne({ where: { email } });
     if (!user) throw new BadRequestException('User not found');
-
-    console.log(user.quantity);
 
     if (user.quantity <= 0)
       throw new BadRequestException('Do not have enough credits');
@@ -77,42 +99,74 @@ export class StoryService {
     const user = await this.userRepository.findOne({ where: { email } });
     if (!user) throw new BadRequestException('User not found');
 
-    const { story, storyGroup } = await this.generateService.generateStory(
-      body,
-    );
+    const { story } = await this.generateService.generateStory(body);
+
     if (!story) throw new Error('Unexpected story type');
 
-    const { title, characterDetails } =
-      await this.generateService.generateStoryDetails(story, storyGroup);
+    // const { title, characterDetails } =
+    //   await this.generateService.generateStoryDetails(story, storyGroup);
 
-    const pages = this.generateService.createPagesFromText(story, storyGroup);
+    // const pages = this.generateService.createPagesFromText(story, storyGroup);
 
-    const pagesWithPrompt = await this.generateService.generateImagePrompt(
-      pages,
-      body.style,
-      characterDetails,
-    );
+    // const pagesWithPrompt = await this.generateService.generateImagePrompt(
+    //   pages,
+    //   body.style,
+    //   characterDetails,
+    // );
 
-    const pagesWithImages = await Promise.all(
-      pagesWithPrompt.map(async (page) => {
-        const { imageBuffer, imageName } =
-          await this.generateService.generateImage(page.image_prompt);
+    // const { imageBuffer, imageName } = await this.generateService.generateImage(
+    //   'Illustrate this scene with pastel colors, wash, transparency, fluidity, softness, blend, light, and dreamy style. Picture Denys exploring a magical world with a wide-eyed wonder, surrounded by a gentle ambiance. Avoid bold lines, harsh edges, precise details, and solid colors in the image.' +
+    //     'sketch, pencil, shading, lines, textures, doodle, simple, rough. no clean lines, no digital, no computer-generated, no precise, no detailed, no polished',
+    // );
 
-        page.image = `https://storage.googleapis.com/enchanta-upload/${imageName}`;
+    // console.log(imageBuffer);
 
-        await this.storage
-          .bucket('enchanta-upload')
-          .file(imageName)
-          .save(imageBuffer['data']);
+    // const filePath = `src/${imageName}`;
+    // fs.writeFileSync(filePath, imageBuffer.data);
 
-        return page;
-      }),
-    );
+    // const imageData = fs.readFileSync('src/enchanta_1316.png');
+
+    // console.log(imageData);
+
+    // const imageName = `enchanta_${(Math.random() * 10000).toFixed(0)}.png`;
+
+    // console.log('https://storage.googleapis.com/novelin-upload/' + imageName);
+
+    // const imageBuffer = decodeBase64Image(image);
+
+    // const cloudinaryResult = await this.uploadToCloudinary(imageData);
+
+    // console.log(cloudinaryResult?.url);
 
     const generatedStory = {
-      title,
-      pages: pagesWithImages,
+      title: story.title,
+      pages: [],
     };
+
+    await Promise.all(
+      story.pages.map(async (page) => {
+        const pageText = Array.isArray(page) ? page.join(' ') : page;
+
+        const imagePrompt =
+          `Create an illustration based on the scene described in the book page: 
+        ${pageText}` +
+          `Your style requirements: ${ILLUSTRATION_STYLES[body.style]}`;
+
+        const { imageBuffer } = await this.generateService.generateImage(
+          imagePrompt,
+        );
+
+        const cloudinaryResult = await this.uploadToCloudinary(
+          imageBuffer.data,
+        );
+
+        generatedStory.pages.push({
+          page_text: pageText,
+          page_image_prompt: imagePrompt,
+          img_url: cloudinaryResult.url,
+        });
+      }),
+    );
 
     this.statisticService.newStory(!user.newStoryCreated, user.id).catch();
 
@@ -123,43 +177,49 @@ export class StoryService {
 
     let i = 0;
 
-    for (const storyPage of generatedStory.pages) {
-      if (storyPage.text.length > 145) {
-        const middleSpaceIndex = storyPage.text
-          .substring(0, storyPage.text.length / 2)
+    console.log(generatedStory);
+
+    for (const {
+      page_text,
+      page_image_prompt,
+      img_url,
+    } of generatedStory.pages) {
+      if (page_text.length > 145) {
+        const middleSpaceIndex = page_text
+          .substring(0, page_text.length / 2)
           .lastIndexOf(' ');
 
-        const part1 = storyPage.text.substring(0, middleSpaceIndex);
-        const part2 = storyPage.text.substring(
+        const part1 = page_text.substring(0, middleSpaceIndex);
+        const part2 = page_text.substring(
           middleSpaceIndex + 1,
-          storyPage.text.length,
+          page_text.length,
         );
 
         await this.pageRepository.save({
           story: storyEntity,
           text: part1,
-          image_prompt: storyPage.image_prompt,
-          image: storyPage.image,
+          image_prompt: page_image_prompt,
+          image: img_url,
           position: i++,
-          images: storyPage.image,
+          images: img_url,
         });
 
         await this.pageRepository.save({
           story: storyEntity,
           text: part2,
-          image_prompt: storyPage.image_prompt,
-          image: storyPage.image,
+          image_prompt: page_image_prompt,
+          image: img_url,
           position: i++,
-          images: storyPage.image,
+          images: img_url,
         });
       } else {
         await this.pageRepository.save({
           story: storyEntity,
-          text: storyPage.text,
-          image_prompt: storyPage.image_prompt,
-          image: storyPage.image,
+          text: page_text,
+          image_prompt: page_image_prompt,
+          image: img_url,
           position: i++,
-          images: storyPage.image,
+          images: img_url,
         });
       }
     }
@@ -167,7 +227,7 @@ export class StoryService {
     return await this.storyRepository.save({
       ...storyEntity,
       title: generatedStory.title,
-      cover: generatedStory.pages[0].image,
+      cover: generatedStory.pages[0].img_url,
       status: 'ok',
     });
   }

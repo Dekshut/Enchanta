@@ -17,6 +17,19 @@ export enum storyType {
   POETRY = 'Poetry',
 }
 
+export enum storyTypeCode {
+  'Counting' = 'CS',
+  'Nursery Rhyme' = 'NR',
+
+  'Bedtime Story' = 'BS',
+  'Bedtime Story with name' = 'BS',
+  'Bedtime Story with out' = 'BS',
+  'Bedtime fantastic' = 'BS',
+
+  'Fairy tale' = 'FT',
+  'Poetry' = 'P',
+}
+
 export enum illustrationStyle {
   INK = 'Ink',
   HAND_DRAWN = 'Hand-drawn',
