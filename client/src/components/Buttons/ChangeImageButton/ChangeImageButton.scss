@@ -12,7 +12,7 @@
   @include fontMedium16;
   color: $btn;
 
-  &>span {
+  & > span {
     width: 24px;
     height: 24px;
     margin-right: 8px;
@@ -28,11 +28,8 @@
     right: -40%;
     bottom: auto;
 
-    @media screen and (max-width: 850px) {
-      top: auto;
-      left: 50%;
-      transform: translateX(-50%);
-      bottom: 30px;
+    @media screen and (max-width: 900px) {
+      position: unset;
     }
   }
 

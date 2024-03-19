@@ -4,7 +4,6 @@
 .read-story {
   @include flexColumnNoWrapCenter;
   justify-content: flex-start;
-  padding-top: 65px;
 
   &__overlay {
     @include flexRowNoWrapBetween;
@@ -16,7 +15,7 @@
         width: 100%;
         padding: 10px 0 30px;
 
-        >.audio-player {
+        > .audio-player {
           bottom: 120px;
         }
       }
@@ -28,13 +27,13 @@
 
     @media screen and (max-width: 650px) {
       width: 440px;
-      padding: 40px 0 125px;
-    }  
+      padding: 40px 0 40pxpx;
+    }
 
     @media screen and (max-width: 500px) {
       @include flexColumnNoWrapCenter;
       flex-direction: column-reverse;
-      padding: 12px 0 125px;
+      padding: 12px 0 20px;
       gap: 8px;
     }
   }

@@ -5,9 +5,9 @@ export const externalLink = {
 };
 
 export const music = [
-  'https://res.cloudinary.com/dvd1ovr5r/video/upload/v1674071579/music/meditation_lzlyys.mp3',
-  'https://res.cloudinary.com/dvd1ovr5r/video/upload/v1674071577/music/this-meditation_mtmmuz.mp3',
-  'https://res.cloudinary.com/dvd1ovr5r/video/upload/v1674071577/music/meditation-piano_n9lvjt.mp3',
-  'https://res.cloudinary.com/dvd1ovr5r/video/upload/v1674071577/music/Piano_Calming_Relaxing_zjfovf.mp3',
-  'https://res.cloudinary.com/dvd1ovr5r/video/upload/v1674071575/music/Calming_Dreamy_Relaxing_Piano_cszpkd.mp3',
+  'https://res.cloudinary.com/malbo/video/upload/v1710876827/hopeful-piano-112621_po88sp.mp3',
+  'https://res.cloudinary.com/malbo/video/upload/v1710877435/relaxing-145038_r7vakz.mp3',
+  'https://res.cloudinary.com/malbo/video/upload/v1710877567/a-gentle-breeze-189206_jjdmgs.mp3',
+  'https://res.cloudinary.com/malbo/video/upload/v1710877640/peaceful-garden-healing-light-piano-for-meditation-zen-landscapes-112199_yz6jnl.mp3',
+  'https://res.cloudinary.com/malbo/video/upload/v1710877732/wings-of-the-spring-193558_sk1vhe.mp3',
 ];

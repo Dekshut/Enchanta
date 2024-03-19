@@ -54,46 +54,6 @@ export class GenerateService {
 
     return { prompt, storyGroup };
   }
-  // createPagesFromText(text, storyGroup) {
-  //   const pages = [];
-
-  //   if (['2NR', '2CS', '5NR', '8P'].includes(storyGroup)) {
-  //     const lineLength = text.split('\n')[0].split(' ').length;
-  //     if (lineLength > 7) {
-  //       for (let i = 0; i < text.split('\n').length; i += 2) {
-  //         if (!text.split('\n')[i + 1]) continue;
-  //         pages.push({
-  //           text: text.split('\n')[i] + '<br/>' + text.split('\n')[i + 1],
-  //           image_prompt: '',
-  //         });
-  //       }
-  //     } else {
-  //       for (let i = 0; i < text.split('\n').length; i += 4) {
-  //         if (!text.split('\n')[i + 1] || !text.split('\n')[i + 2]) continue;
-  //         pages.push({
-  //           text:
-  //             text.split('\n')[i] +
-  //             '<br/>' +
-  //             text.split('\n')[i + 1] +
-  //             '<br/>' +
-  //             text.split('\n')[i + 2] +
-  //             '<br/>' +
-  //             text.split('\n')[i + 3],
-  //           image_prompt: '',
-  //         });
-  //       }
-  //     }
-  //   } else {
-  //     for (let i = 0; i < text.split('\n').length; i++) {
-  //       pages.push({
-  //         text: text.split('\n')[i],
-  //         image_prompt: '',
-  //       });
-  //     }
-  //   }
-
-  //   return pages;
-  // }
 
   async generateStory(body: createStoryDto): Promise<{ story }> {
     let story = null;
@@ -109,103 +69,17 @@ export class GenerateService {
       response_format: { type: 'json_object' },
     });
 
-    story = JSON.parse(completion.choices[0].message.content); // story: { pages, title, externalCharacterFeatures}
+    story = JSON.parse(completion.choices[0].message.content);
 
     console.log(story);
 
     return { story };
   }
 
-  // async generatePagesPrompt(){
-  //   const as = "Generate a prompt for each page so that you can then generate an image based on it. Return JSON according to the scheme below"
-
-  //   const prompt = {
-  //     input:  as,
-  //     output_schema: {
-  //       type: 'object',
-  //       properties: {
-  //         pages: {
-  //           type: 'array',
-  //           items: {
-  //             type: 'string',
-  //             length: 'up to 200 characters',
-  //           },
-  //         },
-  //       },
-  //     },
-  // }
-
-  // async generateStoryDetails(text, storyGroup) {
-  //   let err = null,
-  //     result = null,
-  //     details = null;
-
-  //   const prompt = ['2CS', '2NR'].includes(storyGroup)
-  //     ? `Create a short title for the story. return as json "{"title": ""}". ${text}`
-  //     : `Create a short title for the story. Describe the visual details of main
-  //     character like size and color of body parts. Return as
-  //     json "{"title": "", "characterDetails": "", "characterName": ""}". ${text}`;
-
-  //   do {
-  //     err = null;
-  //     try {
-  //       result = await this.openAi.createCompletion({
-  //         ...this.openAiConfig,
-  //         prompt: `${prompt}`,
-  //       });
-
-  //       details = result.data.choices[0].text;
-
-  //       JSON.parse(details);
-  //     } catch (e) {
-  //       err = e;
-  //     }
-  //   } while (err);
-
-  //   return {
-  //     title: '',
-  //     characterDetails: '',
-  //     characterName: '',
-  //     ...JSON.parse(details),
-  //   };
-  // }
-  // async generateImagePrompt(pages, illustrationStyle, { characterDetails }) {
-  //   let err = null,
-  //     result = null,
-  //     json = null;
-
-  //   const prompt =
-  //     `Create an ${illustrationStyle} style image prompt for the each of text. Return as json array. ` +
-  //     JSON.stringify(pages);
-
-  //   do {
-  //     err = null;
-  //     try {
-  //       result = await this.openAi.createCompletion({
-  //         ...this.openAiConfig,
-  //         prompt: `${prompt}`,
-  //       });
-
-  //       json = result.data.choices[0].text;
-  //       JSON.parse(json);
-  //     } catch (e) {
-  //       err = e;
-  //     }
-  //   } while (err);
-
-  // imagePromptDetails = this.getImagePromptDetails(illustrationStyle);
-
-  //   return JSON.parse(json).map((page) => {
-  //     page.image_prompt =
-  //       page.image_prompt + ` ${characterDetails}` + ` ${imagePromptDetails}`;
-  //     return page;
-  //   });
-  // }
   async generateImage(prompt) {
     let imageBuffer = null,
       imageName = null;
 
-    // переписать под Дали
     try {
       const result = await this.openai.images.generate({
         model: 'dall-e-3',

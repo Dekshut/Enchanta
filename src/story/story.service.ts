@@ -9,20 +9,15 @@ import { Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { ShareLinkEntity } from '../entities/shareLink.entity';
 import { FeedbackEntity } from '../entities/feedback.entity';
-import * as GCloudStorage from '@google-cloud/storage';
 import { ActionType, StatisticService } from 'src/statistic/statistic.service';
 import { GenerateService } from '../generate/generate.service';
-import { title } from 'node:process';
+
 import { v2 as cloudinaryV2, UploadApiResponse } from 'cloudinary';
 import { ILLUSTRATION_STYLES } from 'src/generate/generate.constants';
 const fs = require('fs');
 
 @Injectable()
 export class StoryService {
-  private storage = new GCloudStorage.Storage({
-    projectId: 'vocal-entity-375810',
-  });
-
   constructor(
     @InjectRepository(UserEntity)
     private readonly userRepository: Repository<UserEntity>,
@@ -41,9 +36,7 @@ export class StoryService {
     private readonly generateService: GenerateService,
   ) {}
 
-  private async uploadToCloudinary(
-    imageBuffer: Buffer,
-  ): Promise<UploadApiResponse> {
+  async uploadToCloudinary(imageBuffer: Buffer): Promise<UploadApiResponse> {
     return new Promise<UploadApiResponse>((resolve, reject) => {
       cloudinaryV2.uploader
         .upload_stream(
@@ -61,6 +54,27 @@ export class StoryService {
         .end(imageBuffer);
     });
   }
+  async uploadMp3ToCloudinary(mp3Buffer: Buffer): Promise<UploadApiResponse> {
+    return new Promise<UploadApiResponse>((resolve, reject) => {
+      cloudinaryV2.uploader
+        .upload_stream(
+          {
+            resource_type: 'auto',
+            folder: 'Music',
+            format: 'mp3',
+          },
+          (error, result: UploadApiResponse) => {
+            if (error) {
+              reject(error);
+            } else {
+              resolve(result);
+            }
+          },
+        )
+        .end(mp3Buffer);
+    });
+  }
+
   async generateStory(body: createStoryDto, email: string) {
     const user = await this.userRepository.findOne({ where: { email } });
     if (!user) throw new BadRequestException('User not found');
@@ -102,41 +116,6 @@ export class StoryService {
     const { story } = await this.generateService.generateStory(body);
 
     if (!story) throw new Error('Unexpected story type');
-
-    // const { title, characterDetails } =
-    //   await this.generateService.generateStoryDetails(story, storyGroup);
-
-    // const pages = this.generateService.createPagesFromText(story, storyGroup);
-
-    // const pagesWithPrompt = await this.generateService.generateImagePrompt(
-    //   pages,
-    //   body.style,
-    //   characterDetails,
-    // );
-
-    // const { imageBuffer, imageName } = await this.generateService.generateImage(
-    //   'Illustrate this scene with pastel colors, wash, transparency, fluidity, softness, blend, light, and dreamy style. Picture Denys exploring a magical world with a wide-eyed wonder, surrounded by a gentle ambiance. Avoid bold lines, harsh edges, precise details, and solid colors in the image.' +
-    //     'sketch, pencil, shading, lines, textures, doodle, simple, rough. no clean lines, no digital, no computer-generated, no precise, no detailed, no polished',
-    // );
-
-    // console.log(imageBuffer);
-
-    // const filePath = `src/${imageName}`;
-    // fs.writeFileSync(filePath, imageBuffer.data);
-
-    // const imageData = fs.readFileSync('src/enchanta_1316.png');
-
-    // console.log(imageData);
-
-    // const imageName = `enchanta_${(Math.random() * 10000).toFixed(0)}.png`;
-
-    // console.log('https://storage.googleapis.com/novelin-upload/' + imageName);
-
-    // const imageBuffer = decodeBase64Image(image);
-
-    // const cloudinaryResult = await this.uploadToCloudinary(imageData);
-
-    // console.log(cloudinaryResult?.url);
 
     const generatedStory = {
       title: story.title,
@@ -536,12 +515,6 @@ export class StoryService {
     if (!story) throw new BadRequestException('Story not found');
 
     const oldAudioName = story.audioUrl.split('/').pop();
-    oldAudioName &&
-      this.storage
-        .bucket('enchanta-upload')
-        .file(oldAudioName)
-        .delete()
-        .catch(console.log);
 
     this.statisticService
       .newAudio(!story.user.audioWasCreated, !!oldAudioName, story.user.id)
@@ -552,18 +525,13 @@ export class StoryService {
       this.userRepository.save(story.user).catch(console.log);
     }
 
-    const audioName = `audio_${storyId}_${Date.now()}.mp3`;
-
-    await this.storage
-      .bucket('enchanta-upload')
-      .file(audioName)
-      .save(file['buffer']);
+    const cloudinaryResult = await this.uploadMp3ToCloudinary(file['buffer']);
 
     await this.storyRepository.update(storyId, {
-      audioUrl: `https://storage.googleapis.com/enchanta-upload/${audioName}`,
+      audioUrl: cloudinaryResult.url,
       hasAudio: true,
     });
 
-    return `https://storage.googleapis.com/enchanta-upload/${audioName}`;
+    return cloudinaryResult.url;
   }
 }

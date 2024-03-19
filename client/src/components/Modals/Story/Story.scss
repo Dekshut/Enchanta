@@ -14,7 +14,7 @@
       display: none;
     }
 
-    content: '';
+    // content: '';
     position: absolute;
     width: 100vw;
     height: 120px;
@@ -24,7 +24,7 @@
   }
 
   &::after {
-    content: '';
+    // content: '';
     position: absolute;
     width: 100vw;
     height: 120px;
@@ -76,12 +76,12 @@
   }
 
   &__content {
-    @media screen and (max-width: 500px) {
+    @media screen and (max-width: 650px) {
       margin-top: 50px;
       padding: 0;
     }
 
-    padding: 120px 0;
+    padding: 40px 0 0;
     overflow-y: auto;
     overflow-x: hidden;
     height: 100%;
@@ -92,7 +92,7 @@
     @include flexColumnNoWrapCenter;
     justify-content: flex-start;
     max-width: 1400px;
-    gap: 100px;
+    gap: 60px;
     margin: 0 auto;
     padding: 0 20px;
   }
